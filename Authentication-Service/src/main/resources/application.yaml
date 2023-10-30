@@ -1,0 +1,35 @@
+spring:
+  application:
+    name: AUTHENTICATION-SERVICE
+  datasource:
+    username: postgres
+    password: cjcj1122
+#    username: exam_auth_admin
+#    password: AYjWQw02XBJhea7e7VnA7uWwkWdHXZMM
+#    url: jdbc:postgresql://dpg-cicm9niip7vnjjksdgv0-a.oregon-postgres.render.com/exam_auth_db
+    url: jdbc:postgresql://localhost:5432/codefest_exam
+  jpa:
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    hibernate:
+      ddl-auto: create-drop
+    show-sql: true
+    database: postgresql
+    properties:
+      hibernate:
+        default_schema: auth
+#management:
+#  endpoints:
+#    web:
+#      exposure:
+#        include: "*"
+eureka:
+  instance:
+    hostname: localhost
+  client:
+    fetch-registry: true
+    register-with-eureka: true
+    service-url:
+      defaultZone: http://${eureka.instance.hostname}:8761/eureka
+
+server:
+  port: 0
