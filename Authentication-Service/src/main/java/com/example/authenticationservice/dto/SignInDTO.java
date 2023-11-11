@@ -1,4 +1,4 @@
-package com.example.authenticationservice.models;
+package com.example.authenticationservice.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -7,7 +7,7 @@ import lombok.RequiredArgsConstructor;
 @Data
 @RequiredArgsConstructor
 @AllArgsConstructor
-public class MailStructure {
-    private String subject;
-    private String message;
+public class SignInDTO {
+    String user;
+    String password;
 }

@@ -30,6 +30,9 @@ spring:
         default_schema: auth
   kafka:
     bootstrap-servers: localhost:9092
+    producer:
+      properties:
+        spring.json.trusted.packages: '*'
 #management:
 #  endpoints:
 #    web:

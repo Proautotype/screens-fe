@@ -15,11 +15,4 @@ public class NotificationServiceApplication {
         SpringApplication.run(NotificationServiceApplication.class, args);
     }
 
-    @Bean
-    CommandLineRunner commandLineRunner(KafkaTemplate<String, String> kafkaTemplate){
-        return args -> {
-            kafkaTemplate.send("notification","hello kafka");
-        };
-    }
-
 }

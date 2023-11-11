@@ -14,6 +14,7 @@ import java.util.UUID;
 @RequiredArgsConstructor
 public class PasswordManagerService {
     private final PasswordManagerRepository passwordManagerRepository;
+    private final PasswordManager passwordManager;
 
     public <T extends User> String AddPassword(T user){
         PasswordManager pm;
@@ -24,5 +25,14 @@ public class PasswordManagerService {
         pm.setPassword(initial);
         passwordManagerRepository.save(pm);
         return initial;
+    }
+
+    public boolean ComparePassword(String id, String password){
+        Optional<PasswordManager> passwordManagerOptional = passwordManagerRepository.findById(UUID.fromString(id));
+        if(passwordManagerOptional.isPresent()){
+            PasswordManager pm = passwordManagerOptional.get();
+            return passwordManagerOptional.get().checkPassword(password, pm.getPassword());
+        }
+        return false;
     }
 }

@@ -6,13 +6,15 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.springframework.security.crypto.bcrypt.BCrypt;
+import org.springframework.stereotype.Service;
 
 import java.util.UUID;
 
 @Entity
 @Data
-
+@Service
 public class PasswordManager {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)

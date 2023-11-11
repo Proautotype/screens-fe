@@ -1,8 +1,8 @@
 package com.custard.notificationservice.Controller;
 
-import com.custard.notificationservice.Model.MailStructure;
 import com.custard.notificationservice.Service.MailService;
 import lombok.AllArgsConstructor;
+import org.custard.model.MailStructure;
 import org.springframework.web.bind.annotation.*;
 
 @RestController

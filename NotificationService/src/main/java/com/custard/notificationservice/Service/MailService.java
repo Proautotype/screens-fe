@@ -1,7 +1,7 @@
 package com.custard.notificationservice.Service;
 
-import com.custard.notificationservice.Model.MailStructure;
 import lombok.RequiredArgsConstructor;
+import org.custard.model.MailStructure;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
