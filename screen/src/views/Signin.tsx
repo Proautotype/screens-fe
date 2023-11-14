@@ -17,6 +17,7 @@ import CustomDialog from "../components/CustomDialog";
 import CustomTextField from "../components/CustomTextField";
 import {useNavigate} from "react-router";
 import {routerPaths} from "../router.config";
+import PrimaryButton from "../components/PrimaryButton";
 
 interface iStateDescriptor{
   email: string,
@@ -89,7 +90,7 @@ const Signin = () => {
   }
 
   const SignIn = () => {
-    navigate(routerPaths.student)
+    navigate(routerPaths.student.root)
   }
 
   return <Stack sx={MainStyle}>
@@ -138,7 +139,7 @@ const Signin = () => {
 
 export default Signin
 
-const MainStyle: SxProps<Theme> = {
+export const MainStyle: SxProps<Theme> = {
   backgroundColor: colors.primary,
   display: "flex",
   justifyContent: "flex-end",
@@ -212,20 +213,4 @@ const ContentAreaStyle: SxProps<Theme> = {
     }
   }
 }
-const PrimaryButton = (props: {text: string, busy: boolean, height?: string | number, onAction?: ()=>void}) => {
-  return <Button
-    aria-label={'sign in'}
-    title={'sign in'}
-    sx={{
-      height:props.height || 50,
-      backgroundColor:colors.primary,
-      color: colors.plain,
-      '&:hover':{
-        backgroundColor:colors.primary
-      }
-    }}
-    onClick={props.onAction}
-  >
-    {!props.busy && props.text} {props.busy && <CircularProgress color={'inherit'} size={15} sx={{marginLeft: 1}}/>}
-  </Button>
-}
+
