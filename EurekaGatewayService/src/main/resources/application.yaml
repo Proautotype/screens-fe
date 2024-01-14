@@ -20,5 +20,23 @@ spring:
           uri: lb://NOTIFICATION-SERVICE
           predicates:
             - Path=/api/v1/notification/**
+        - id: examination
+          uri: lb://EXAMINATION-SERVICE
+          predicates:
+            - Path=/api/v1/examination/**
+      globalcors:
+        cors-configurations:
+          '[/**]':
+            allowedOrigins: "*"
+            allowedMethods:
+              - GET
+              - POST
+      default-filters:
+        - DedupeResponseHeader=Access-Control-Allow-Credentials Access-Control-Allow-Origin
   application:
     name: Gateway
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"

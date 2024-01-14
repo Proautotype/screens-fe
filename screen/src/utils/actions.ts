@@ -1,3 +1,5 @@
+import dayjs from "dayjs";
+
 class Actions {
   public static Shuffle: (value: string[]) => string[] = (value: string[]) => {
     let len = value.length;
@@ -12,6 +14,9 @@ class Actions {
       }
     }
     return result;
+  }
+  public static NavTimeFormatter : (timer: dayjs.Dayjs)=>string = (timer: dayjs.Dayjs)=>{
+    return timer.format("H") + " Hrs " + timer.format("mm") + " min";
   }
 }
 

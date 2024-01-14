@@ -8,6 +8,7 @@ import StudentExam from "./views/Student/Exams/Exam";
 import ExamInstructions from "./views/Student/Exams/ExamInstructions";
 import CameraInstructions from "./views/Student/Exams/CameraInstructions";
 import QuestionBoard from "./views/Question";
+import Lecturer from "./views/Lecturer";
 
 
 export const routerPaths = {
@@ -22,6 +23,9 @@ export const routerPaths = {
     instructions:"/exam/instructions",
     camera:"/exam/instructions/camera",
     questions:"/exam/questions",
+  },
+  lecturer:{
+    root: "/lecturer",
   }
 }
 const routes: RouteObject[] = [
@@ -65,6 +69,11 @@ const routes: RouteObject[] = [
   {
     path: routerPaths.exams.questions,
     element: <QuestionBoard/>,
+    errorElement: <ErrorPage/>,
+  },
+  {
+    path: routerPaths.lecturer.root,
+    element: <Lecturer AssessmentID={"3a7f93f0-14b2-4ba3-a5b8-522e2623b562"}/>,
     errorElement: <ErrorPage/>,
   }
 ]

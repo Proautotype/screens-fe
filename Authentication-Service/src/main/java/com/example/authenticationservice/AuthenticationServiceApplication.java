@@ -14,15 +14,4 @@ public class AuthenticationServiceApplication {
         SpringApplication.run(AuthenticationServiceApplication.class, args);
     }
 
-//    @Bean
-//    CommandLineRunner commandLineRunner(KafkaTemplate<String, MailStructure> kafkaTemplate){
-//        return args -> {
-//            MailStructure mailStructure = new MailStructure();
-//            mailStructure.setMessage("a message of work");
-//            mailStructure.setSubject("blue");
-//            mailStructure.setRecipient("ampomah.winston");
-////            kafkaTemplate.send(KafkaTopics.NOTIFICATION.name(), mailStructure);
-//            kafkaTemplate.send(KafkaTopics.NOTIFICATION.name(), mailStructure);
-//        };
-//    }
 }

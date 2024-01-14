@@ -66,6 +66,7 @@ const Signin = () => {
         throw new Error("Unknown action");
     }
   }
+
   const [state, dispatch] = useReducer(stateReducer,initialState);
 
   const triggerDialog = () => dispatch({type:"updateDialogOpen", value: !state.openDialog})

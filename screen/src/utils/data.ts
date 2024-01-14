@@ -1,31 +1,30 @@
 import dayjs from "dayjs";
 
-interface answers {
-  literals: string[]
-  options: "single" | "multiple"
-}
+
 interface instructor{
     id: string,
     name: string,
     img?: string
 }
-interface iQuestionBody {
+export interface iQuestionBody {
   id: string,
   type: "QA" | "written",
   question: string,
-  answers: answers[]
+  options: "single" | "multiple"
+  answers: string[]
 }
-interface iData {
+export interface examBody {section: string,  security: boolean,questions:iQuestionBody[]}
+export interface iData {
   id: string,
   title: string,
   startDate: dayjs.Dayjs,
   endDate: dayjs.Dayjs,
   instructor:instructor
   instructions: string[],
-  body: {section: string, questions:iQuestionBody[]}[]
+  body: examBody[] | string[]
 }
 
-const data: iData = {
+const mockData: iData = {
   id: "1",
   title:"PHY104 - Introduction To Physics",
   startDate: dayjs(),
@@ -42,19 +41,52 @@ const data: iData = {
   body:[
     {
       section:"a",
+      security: false,
       questions:[
         {
           id: "1",
           type: "QA",
           question: "what is a verb",
+          options: "single",
           answers:[
-            {
-              options: "single",
-              literals: [
-                "a man",
-                "jumping"
-              ]
-            }
+            "a man",
+            "jumping"
+          ]
+        },
+        {
+          id: "1",
+          type: "QA",
+          question: "what is a verb",
+          options: "multiple",
+          answers:[
+            "a man",
+            "jumping"
+          ]
+        }
+      ]
+    },
+    {
+      section:"b",
+      security: true,
+      questions:[
+        {
+          id: "1",
+          type: "QA",
+          question: "what is a verb",
+          options: "single",
+          answers:[
+            "a man",
+            "jumping"
+          ]
+        },
+        {
+          id: "1",
+          type: "QA",
+          question: "what is a verb",
+          options: "multiple",
+          answers:[
+            "a man",
+            "jumping"
           ]
         }
       ]
@@ -62,4 +94,4 @@ const data: iData = {
   ]
 }
 
-export default data
+export default mockData

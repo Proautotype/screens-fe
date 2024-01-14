@@ -1,31 +1,21 @@
 import {Box, Checkbox, FormControlLabel, Radio, RadioGroup, Stack, SxProps, Typography} from "@mui/material";
 import colors from "../../../assets/colors/colors";
 import Actions from "../../../utils/actions";
-import PrimaryButton from "../../../components/PrimaryButton";
+import {iQuestionBody} from "../../../utils/data";
 
 interface IProps {
-  question: string,
-  option: 'optional' | 'multiple'
-  answers: string[]
+  questionBody: iQuestionBody
 }
 
 const QA = (props: IProps) => {
   //@ts-ignore
-  const selectAnswer = (e: MouseEvent<HTMLDivElement>, selected: number) => {
-    const answers = document.getElementById('answers');
-    const selectedItem = answers?.getElementsByClassName('selected');
-    if (selectedItem && selectedItem.length > 0) {
-      selectedItem[0].classList.remove('selected');
-    }
-    //@ts-ignore
-    e.currentTarget.classList.add('selected');
-  }
+
   return <Stack sx={QAStyle}>
     <Box className={'question'}>
-      <Typography>{props.question}</Typography>
+      <Typography>{props.questionBody.question}</Typography>
     </Box>
-    {props.option === "optional" && <RadioGroup id={'answers'} className={'answers'}>
-      {Actions.Shuffle(props.answers).map((answer, idx) =>
+    {props.questionBody.options === "single" && <RadioGroup id={'answers'} className={'answers'}>
+      {Actions.Shuffle(props.questionBody.answers).map((answer, idx) =>
         <FormControlLabel key={answer + idx} sx={answerStyle}
                           control={<Radio/>}
                           value={answer}
@@ -35,8 +25,8 @@ const QA = (props: IProps) => {
 
     </RadioGroup>}
 
-    {props.option === "multiple" && <RadioGroup id={'answers'} className={'answers'}>
-      {Actions.Shuffle(props.answers).map((answer, idx) =>
+    {props.questionBody.options === "multiple" && <RadioGroup id={'answers'} className={'answers'}>
+      {Actions.Shuffle(props.questionBody.answers).map((answer, idx) =>
         <FormControlLabel key={answer + idx} sx={answerStyle}
                           control={<Checkbox/>}
                           value={answer}

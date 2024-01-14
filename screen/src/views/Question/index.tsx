@@ -1,16 +1,19 @@
 import {Divider, Stack, SxProps} from "@mui/material";
-import Nav, {centerRowStyle} from "./Card/Nav";
+import Nav from "./Card/Nav";
 import Frame from "./Frame";
+import {useRef} from "react";
+import mockData, {examBody, iData} from "../../utils/data";
 
-const index = () => {
+const Index = () => {
+  const mock = useRef<iData>(mockData);
   return <Stack sx={QuestionsStyle}>
-    <Nav/>
+    <Nav title={mock.current.title} time={mock.current.startDate}/>
     <Divider/>
-    <Frame/>
+    <Frame examData={mock.current.body as examBody[]} />
   </Stack>
 }
 
-export default index
+export default Index
 
 const QuestionsStyle:SxProps = {
   width:"100vw",

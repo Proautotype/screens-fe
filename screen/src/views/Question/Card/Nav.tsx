@@ -3,8 +3,12 @@ import {Box, Stack, SxProps, Typography} from "@mui/material";
 import book from '../../../assets/images/Book.svg';
 import clock from '../../../assets/images/clock.svg';
 import colors from "../../../assets/colors/colors";
+import dayjs from "dayjs";
+import Actions from "../../../utils/actions";
 
 interface IProps {
+  title: string,
+  time: dayjs.Dayjs
 }
 
 const Nav = (props: IProps) => {
@@ -15,7 +19,7 @@ const Nav = (props: IProps) => {
       <Box>
         <img alt={'book'} src={book}/>
       </Box>
-      <Typography className={'subject'}>PHY104 - Introduction To Physics</Typography>
+      <Typography className={'subject'}>{props.title}</Typography>
       <Box className={'indicator'}>
         <Box className={'body'}></Box>
       </Box>
@@ -26,7 +30,7 @@ const Nav = (props: IProps) => {
        <img alt={'clock'} src={clock}/>
      </Box>
       <Stack className={'timer'}>
-        <Typography className={'time'}>01 Hrs 45 min</Typography>
+        <Typography className={'time'}>{Actions.NavTimeFormatter(props.time)}</Typography>
         <Typography className={'detail'}>Time left</Typography>
       </Stack>
     </Stack>

@@ -21,6 +21,10 @@ class Texts {
     return this.cameraInstructions.split('.')
   }
 
+  public static generateRandom () {
+    return Math.random().toString(36).substring(2, 9)
+  }
+
 }
 
 export default Texts
