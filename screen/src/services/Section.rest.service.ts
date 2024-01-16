@@ -76,7 +76,7 @@ class SectionRestService {
       return (await instance({
         method:"DELETE",
         url:"deleteQuestion",
-        data:{
+        params:{
           questionID
         }
       }))

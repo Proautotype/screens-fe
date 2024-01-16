@@ -1,4 +1,6 @@
 import {
+    Accordion,
+    AccordionDetails, AccordionSummary,
     Badge,
     Box,
     Button, Checkbox, Chip,
@@ -16,7 +18,7 @@ import {
 import {
     Add,
     CheckCircle,
-    Delete,
+    Delete, ExpandMore,
     HighlightOffOutlined,
     Remove
 } from "@mui/icons-material";
@@ -253,8 +255,9 @@ const Section = (props: { data: iSection, examID: string }) => {
         <Stack gap={2}>
             {
                 props.data && props.data?.questions && props.data.questions.map((question
-                ,idx) => (
-                    <SingleQuestion key={question.id} sectionID={props.data.id} question={question} questionNumber={idx+1}/>
+                    , idx) => (
+                    <SingleQuestion key={question.id} sectionID={props.data.id} question={question}
+                                    questionNumber={idx + 1}/>
                 ))
             }
             <Button onClick={AddNewQuestion}>Add New Question</Button>
@@ -462,9 +465,9 @@ const CreateQuestionComponent = (props: { sectionID: string }) => {
                     return <FormControlLabel key={idx + choice.id} value={choice.value}
                                              control={actionsState.answerType ?
                                                  <Radio
-                                                    onChange={(event, checked)=>{
-                                                        changeSingleChoiceSelection(choice);
-                                                    }}
+                                                     onChange={(event, checked) => {
+                                                         changeSingleChoiceSelection(choice);
+                                                     }}
                                                  /> : <Checkbox
                                                      onChange={(event, checked) => changeMultipleChoiceSelection(choice, checked)}/>}
                                              label={
@@ -547,19 +550,24 @@ const SingleQuestion = (prop: iSingleQuestionProp) => {
     useEffect(() => {
         // console.log(prop.question.answer)
     }, [])
-    return <Stack sx={QuestionStyle}>
-        <Stack className={'action-group'} direction={"row"} justifyContent={"space-between"} alignItems={"center"}>
-            <Chip label={prop.questionNumber} variant="filled" />
-            <Box>
-                <FormControlLabel control={<Checkbox/>} label={"Edit"}/>
-                <Button color={"error"} onClick={()=> actDeleteQuestion(prop.question.id)}>Delete</Button>
-            </Box>
+    return <Accordion sx={QuestionStyle}>
+        {/*direction={"row"} justifyContent={"space-between"} alignItems={"center"}*/}
+        <AccordionSummary expandIcon={<ExpandMore/>}>
+            <Stack className={'question-action-group-container'} justifyContent={'space-between'} alignItems={"center"}>
+                <Chip label={"Question " +prop.questionNumber} variant="filled"/>
+                <Box>
+                    <FormControlLabel control={<Checkbox/>} label={"Edit"}/>
+                    <Button color={"error"} onClick={() => actDeleteQuestion(prop.question.id)}>Delete</Button>
+                </Box>
+            </Stack>
+        </AccordionSummary>
+        {/*<Divider/>*/}
+        <Stack>
+            <textarea rows={5} cols={20} onChange={onChangeQuestion} defaultValue={prop.question.question}
+                      style={{resize: "none"}}/>
         </Stack>
-        <Divider/>
-        <textarea rows={5} cols={20} onChange={onChangeQuestion} defaultValue={prop.question.question}
-                  style={{resize: "none"}}/>
-        <Divider/>
-        <Stack gap={1} className={'answers-container'}>
+        {/*<Divider/>*/}
+        <Stack className={'answers-container'} gap={1}>
             {prop.question.answer
                 && prop.question.answer.length > 0
                 && prop.question.answer.map((answer, idx) =>
@@ -570,18 +578,20 @@ const SingleQuestion = (prop: iSingleQuestionProp) => {
                            alignItems={"center"} justifyContent={"flex-start"}
                     >
                         <Box className={'isCorrect'}>
-                            {answer.isCorrect ?  <CheckCircle color={"success"}/> : <HighlightOffOutlined color={"error"}/>}
+                            {answer.isCorrect ? <CheckCircle color={"success"}/> :
+                                <HighlightOffOutlined color={"error"}/>}
                         </Box>
                         <input placeholder={'an answer'} defaultValue={answer.data}
                                onChange={(e) => updateAnswer(answer.id, e.target.value)}/>
                         <FormControlLabel className={'action-group'}
-                            control={  <Checkbox title={"Enable Editing"} />}
-                            label={"Edit"}
+                                          control={<Checkbox title={"Enable Editing"}/>}
+                                          label={"Edit"}
                         />
-                    </Stack>)}
+                    </Stack>
+                )}
         </Stack>
 
-    </Stack>
+    </Accordion>
 }
 const QuestionStyle: SxProps = {
     gap: 1,
@@ -593,7 +603,14 @@ const QuestionStyle: SxProps = {
         border: "2px solid #e5e3e3",
         outline: "none",
         borderRadius: 2,
-        padding:1
+        padding: 1
+    },
+    '.question-action-group-container':{
+        display:"flex",
+        flexDirection:"row",
+        justifyContent:"space-between",
+        alignItems:"center",
+        width: "100%"
     },
     '.answers-container': {
         padding: '5px 2px',
@@ -601,20 +618,20 @@ const QuestionStyle: SxProps = {
             backgroundColor: 'rgba(229,227,227,0.3)',
             borderRadius: 2,
             position: "relative",
-            paddingLeft:1,
-            padding:1,
-            '.isCorrect':{
-                '&:hover':{
-                    cursor:"pointer"
+            paddingLeft: 1,
+            padding: 1,
+            '.isCorrect': {
+                '&:hover': {
+                    cursor: "pointer"
                 }
             },
             input: {
                 width: "85%",
                 borderRadius: 2,
-                border:"none",
-                outline:"none",
-                background:"none",
-                paddingLeft:1
+                border: "none",
+                outline: "none",
+                background: "none",
+                paddingLeft: 1
             },
             '.action-group': {
                 position: "absolute",
